@@ -1,4 +1,4 @@
-# WifiScanner
+# Wifi Scanner
 *Author: [Friedjof Noweck](https://github.com/friedjof)*
 
 This is a simple wifi scanner for the esp32s3. It uses the esp-idf framework and the esp32s3-devkitm-1 board. The scanner will scan for wifi networks and save the results in a sqlite3 database. The database is stored on the separate micro sd card. The scanner will also print the results to the serial console.
