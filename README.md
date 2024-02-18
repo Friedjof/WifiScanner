@@ -3,6 +3,8 @@
 
 This is a simple wifi scanner for the esp32s3. It uses the esp-idf framework and the esp32s3-devkitm-1 board. The scanner will scan for wifi networks and save the results in a sqlite3 database. The database is stored on the separate micro sd card. The scanner will also print the results to the serial console.
 
+![ESP32S3 Size](./images/esp32s3-size.jpg)
+
 ## Requirements
 The Seed Studio ESP32-S3 Board is a compact and efficient development tool designed for IoT and image processing projects, featuring:
 
@@ -62,6 +64,22 @@ For more advanced commands, you can use the help command.
 ```bash
 make help
 ```
+
+## Flashing from the release page
+### Flashing
+In the release section, you can find the latest binary files for the microcontrollers. You can use the following commands to flash the binary files to the `ESP32S3`.
+You need to change the `--port` parameter to match your system configuration and the path to the binary files.
+
+Install the esptool with the following command if you haven't already.
+```bash
+pip install esptool
+```
+
+Flash the bootloader, partitions, and firmware to the microcontroller.
+```bash
+esptool.py --port /dev/ttyUSB0 --baud 921600 --before default_reset --after hard_reset write_flash -z --flash_mode dio --flash_freq 40m --flash_size detect 0x1000 bootloader.bin 0x8000 partitions.bin 0x10000 firmware.bin
+```
+
 ## How to contribute
 If you want to contribute to this project, feel free to create a fork and submit a pull request. You can also create an issue if you find a bug or have a feature request.
 
