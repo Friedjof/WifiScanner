@@ -12,8 +12,8 @@ UPLOAD_PORT = /dev/ttyACM0
 # Serial baud rate (you may need to adjust this)
 UPLOAD_SPEED = 115200
 
-# Define the ESP32 board model (e.g., esp32, esp32dev, esp32cam, etc.)
-BOARD = esp32cam
+# Define the ESP32 board environment
+BOARD = esp32s3
 
 # Location of PlatformIO build directory
 BUILD_DIR = .pio/build/$(BOARD)

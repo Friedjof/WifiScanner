@@ -1,0 +1,45 @@
+name: Release Workflow
+
+on: 
+  push:
+    tags:
+      - '*'
+
+jobs:
+  create-release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: Install PlatformIO
+      run: |
+        pip install platformio
+        platformio update
+
+    - name: Build all platforms
+      run: platformio run -e esp32s3
+
+    - name: Archive binaries
+      run: |
+        mkdir -p binaries/esp32s3
+
+        mv .pio/build/esp32s3/*.bin binaries/esp32s3/
+
+    - name: Create Release
+      id: create_release
+      uses: meeDamian/github-release@2.0
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        tag: ${{ github.ref }}
+        files: >
+          ./binaries/esp32s3/
+        gzip: folders
